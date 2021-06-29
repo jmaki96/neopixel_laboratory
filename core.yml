@@ -1,0 +1,40 @@
+version: '2.1'
+
+networks:
+  default:
+    name: core_network
+  
+volumes:
+  my-sql-data-volume:
+
+services:
+  db:
+    image: mysql:5.7.25
+    container_name: core_db_1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: core_db
+      MYSQL_USER: web_user
+      MYSQL_PASSWORD: password
+      MYSQL_HOST: core_db_1
+    volumes:
+      - my-sql-data-volume:/var/lib/mysql
+  
+  web:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    image: neopixel_laboratory/web:latest
+    container_name: core_web_1
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: core_db
+      MYSQL_USER: web_user
+      MYSQL_PASSWORD: password
+      MYSQL_HOST: core_db_1
+      FLASK_APP: app.main
+    depends_on:
+      - db
+    volumes:
+      - ./app:/var/code
+    
