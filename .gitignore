@@ -1,0 +1,11 @@
+# Ignore IDE files
+/.vscode/
+
+# Ignore log files
+**/logs/*
+
+# Ignore virtual environment files
+/venv/*
+
+# Ignore secret files
+*.env
