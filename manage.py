@@ -187,7 +187,7 @@ def up(args: argparse.Namespace) -> None:
     # pylint:disable=invalid-name
 
     _popen(
-        DOCKER_COMPOSE_PREFIX + ' up -d --build --force-recreate'
+        DOCKER_COMPOSE_PREFIX + f' -f {YAML_DEV} up -d --build --force-recreate'
     ).wait()
 
 
@@ -198,7 +198,7 @@ def down(args: argparse.Namespace) -> None:
     """
 
     _popen(
-        DOCKER_COMPOSE_PREFIX + ' down'
+        DOCKER_COMPOSE_PREFIX + f' -f {YAML_DEV} down'
     ).wait()
 
 

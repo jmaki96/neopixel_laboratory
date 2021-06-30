@@ -6,6 +6,7 @@
 
 # Ignore virtual environment files
 /venv/*
+**/__pycache__/*
 
 # Ignore secret files
 *.env

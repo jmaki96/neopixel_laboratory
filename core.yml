@@ -26,6 +26,7 @@ services:
       dockerfile: Dockerfile
     image: neopixel_laboratory/web:latest
     container_name: core_web_1
+    command: flask run --host="0.0.0.0"
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: core_db
