@@ -10,6 +10,17 @@ _logger = logging.getLogger(__name__)
 bp = Blueprint('neopixel', __name__, url_prefix='/np')
 
 
+@bp.route('/submit_command')
+def submit_command() -> Response:
+    """ Submits a command to the neopixeld, and returns its response.
+
+    Returns:
+        Response: [description]
+    """
+
+    pass
+
+
 @bp.route('/off')
 def off() -> Response:
     """ Turns off all running neopixels
