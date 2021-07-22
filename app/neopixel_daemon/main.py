@@ -102,6 +102,7 @@ if __name__ == "__main__":
 
     # initialize daemon context
     context = daemon.DaemonContext(
+        detach_process=False
     )
 
     # Configure signal handlers
