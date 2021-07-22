@@ -1,6 +1,7 @@
 """ Main entry-point script for the while True loop that manages the Neopixels.
 
 The webservice should call this as a subprocess, because this script will run as a blocking process.
+Basically, it's meant to run as a daemon-like service.
 
 It should handle a TERM or KILL signal to exit gracefully.
 """
