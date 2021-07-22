@@ -15,7 +15,6 @@ What should the Neopixel service do?
 import os
 import logging
 import datetime
-import sys
 import signal
 
 import daemon
@@ -63,12 +62,26 @@ def main():
     """ Main daemon process, which polls named pipe (i.e. stdin) for commands and responds
     """
 
-    command = sys.stdin.readline()
+    # Open up pipes 
+    stdout_named_pipe_path = os.path.join(os.getcwd(), STDOUT_NAMED_PIPE)
+    stdin_named_pipe_path = os.path.join(os.getcwd(), STDIN_NAMED_PIPE)
+    if not os.path.exists(stdout_named_pipe_path):
+        os.mkfifo(stdout_named_pipe_path)
+    
+    if not os.path.exists(stdin_named_pipe_path):
+        os.mkfifo(stdin_named_pipe_path)
+    
+    _logger.info("Opening named pipes...")
+    with open(stdin_named_pipe_path, "r") as stdin_h, open(stdout_named_pipe_path, "w") as stdout_h:
+        _logger.info("Named pipes open!")
 
-    if "valid" in command:
-        print(f"received valid command: {command}")
-    else:
-        print(f"received invalid command: {command}")
+        while True:
+            command = stdin_h.readline()
+
+            if "valid" in command:
+                stdout_h.write(f"received valid command: {command}")
+            else:
+                stdout_h.write(f"received invalid command: {command}")
 
 
 def _terminate() -> None:
@@ -87,32 +100,19 @@ def _hangup() -> None:
 
 if __name__ == "__main__":
 
-    # Instantiate named pipes
-    stdout_named_pipe_path = os.path.join(os.getcwd(), STDOUT_NAMED_PIPE)
-    stdin_named_pipe_path = os.path.join(os.getcwd(), STDIN_NAMED_PIPE)
-    if not os.path.exists(stdout_named_pipe_path):
-        os.mkfifo(stdout_named_pipe_path)
-    
-    if not os.path.exists(stdin_named_pipe_path):
-        os.mkfifo(stdin_named_pipe_path)
-    
-    _logger.info("Opening named pipes...")
-    with open(stdin_named_pipe_path, "r") as stdin_h, open(stdout_named_pipe_path, "w") as stdout_h:
-        # initialize daemon context
-        context = daemon.DaemonContext(
-            stdin=stdin_h,
-            stdout=stdout_h
-        )
+    # initialize daemon context
+    context = daemon.DaemonContext(
+    )
 
-        # Configure signal handlers
-        context.signal_map = {
-            signal.SIGTERM: _terminate,
-            signal.SIGHUP: _hangup
-        }
+    # Configure signal handlers
+    context.signal_map = {
+        signal.SIGTERM: _terminate,
+        signal.SIGHUP: _hangup
+    }
 
-        _logger.info("Launching daemon")
-        with context:
-            main()
+    _logger.info("Launching daemon")
+    with context:
+        main()
     
 
         
