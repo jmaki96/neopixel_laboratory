@@ -96,7 +96,8 @@ if __name__ == "__main__":
     if not os.path.exists(stdin_named_pipe_path):
         os.mkfifo(stdin_named_pipe_path)
     
-    with open(stdin_named_pipe_path, "r") as stdin_h, open(stdout_named_pipe_path, "w+") as stdout_h:
+    _logger.info("Opening named pipes...")
+    with open(stdin_named_pipe_path, "r") as stdin_h, open(stdout_named_pipe_path, "w") as stdout_h:
         # initialize daemon context
         context = daemon.DaemonContext(
             stdin=stdin_h,
@@ -109,7 +110,10 @@ if __name__ == "__main__":
             signal.SIGHUP: _hangup
         }
 
+        _logger.info("Launching daemon")
         with context:
             main()
+    
+
         
 
