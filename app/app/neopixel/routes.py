@@ -10,6 +10,16 @@ _logger = logging.getLogger(__name__)
 bp = Blueprint('neopixel', __name__, url_prefix='/np')
 
 
+@bp.route('/off')
+def off() -> Response:
+    """ Turns off all running neopixels
+
+    Returns:
+        Response: OK if process exits appropriately
+    """
+
+    return make_response("OK", 200)
+
 @bp.route('/start', methods=["GET"])
 def hello() -> Response:
     """ Start running the Neopixel daemon. Optionally, provide an RGB hex code. 
