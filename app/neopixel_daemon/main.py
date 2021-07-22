@@ -72,7 +72,7 @@ def main():
         os.mkfifo(stdin_named_pipe_path)
     
     _logger.info("Opening named pipes...")
-    with open(stdin_named_pipe_path, "r") as stdin_h, open(stdout_named_pipe_path, "w") as stdout_h:
+    with open(stdin_named_pipe_path, os.O_RDONLY | os.O_NONBLOCK) as stdin_h, open(stdout_named_pipe_path, os.O_WRONLY) as stdout_h:
         _logger.info("Named pipes open!")
 
         while True:
