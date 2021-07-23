@@ -147,7 +147,6 @@ if __name__ == "__main__":
                 pid = int(pid_h.readline())
 
                 subprocess.call(shlex.split(f"kill {pid}"))
-
     
     if args.start:
         _logger.info(f"Configuring daemon with pidfile: {DAEMON_PID_FILE_PATH}")

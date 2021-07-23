@@ -76,6 +76,9 @@ class Command(ABC):
         else:
             raise ValueError(f"Cannot find command named: {command_name}")
 
+# Register commands
+from commands.off_command import OffCommand
+from commands.set_light import SetLightCommand
 
 class EchoCommand(Command):
     """ Testing command which simply echoes back the name, args, and kwargs."""

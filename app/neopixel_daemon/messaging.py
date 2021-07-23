@@ -140,10 +140,24 @@ if __name__ == "__main__":
         if not os.path.exists(STDIN_NAMED_PIPE_PATH):
             os.mkfifo(STDIN_NAMED_PIPE_PATH)
 
-        write_command("echo", 
-                      ["pos_arg1", "pos_arg2"], 
-                      {"key1": "value1",
-                       "key2": "value2"},
-                       fifo=STDIN_NAMED_PIPE_PATH)
+        if sys.argv[2] == "echo":
+            write_command("echo", 
+                        ["pos_arg1", "pos_arg2"], 
+                        {"key1": "value1",
+                        "key2": "value2"},
+                        fifo=STDIN_NAMED_PIPE_PATH)
+        elif sys.argv[2] == "off":
+            write_command("off", 
+                         [], 
+                         {},
+                         fifo=STDIN_NAMED_PIPE_PATH)
+        elif sys.argv[2] == "set":
+            write_command("set", 
+                         [], 
+                         {"brightness": "0.6",
+                          "color": "0xE09D37"},
+                         fifo=STDIN_NAMED_PIPE_PATH)
+        else:
+            _logger.info(f"Unknown command type {sys.argv[2]}")
     else:
         _logger.info(f"Unknown command {sys.argv[1]}")
