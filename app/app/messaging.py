@@ -78,14 +78,14 @@ def get_message(fifo: str) -> bytes:
     return msg_content
 
 
-def write_command(command: str, args: List[str], kwargs: Dict[str, str], fifo: Optional[str] = STDOUT_NAMED_PIPE_PATH) -> None:
+def write_command(command: str, args: List[str], kwargs: Dict[str, str], fifo: Optional[str] = STDIN_NAMED_PIPE_PATH) -> None:
     """ Writes a command with arguments to STDIN queue.
 
     Args:
         command (str): command to issue
         args (List[str]): positional arguments in a list
         kwargs (Dict[str, str]): keyword arguments, after positional arguments
-        fifo (str, optional): the name of the pipe to write too. Defaults to STDOUT_NAMED_PIPE.
+        fifo (str, optional): the name of the pipe to write too. Defaults to STDIN_NAMED_PIPE.
     
     Raises:
         FileNotFoundError: If the named pipe has not been opened yet.
