@@ -22,8 +22,12 @@ def set_light() -> Response:
     """
 
     try:
-        brightness = request.args["brightness"]
-        color = request.args["color"]
+        _logger.info(request.args)
+        brightness = request.args.get("brightness", None)
+        color = request.args.get("color", None)
+
+        if not brightness or not color:
+            return make_response(f"Missing required argument. brightness is {brightness} and color is {color}", 404)
 
         write_command("set", [], {
             "brightness": brightness,
