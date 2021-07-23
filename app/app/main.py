@@ -7,9 +7,10 @@ import datetime
 
 from flask import Flask
 
-from .extensions.flask_database import db
-from .test.routes import bp as test_bp
-from . import settings
+from app.extensions.flask_database import db
+from app.test.routes import bp as test_bp
+from app.neopixel.routes import bp as np_bp
+from app import settings
 
 # =====================
 # === LOGGING SETUP ===
@@ -80,4 +81,5 @@ _logger.info("Done.")
 
 _logger.info("Registering Flask blueprints...")
 app.register_blueprint(test_bp)
+app.register_blueprint(np_bp)
 _logger.info("Done.")
