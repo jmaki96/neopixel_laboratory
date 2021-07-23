@@ -123,7 +123,7 @@ def _has_admin_privileges() -> bool:
 
     system_name = platform.system()
 
-    if system_name in MAC_VERSION:
+    if system_name in MAC_VERSION or system_name == "Linux":
         euid = os.getuid()
         _logger.debug(f"euid is {euid}")
         return euid == 0
