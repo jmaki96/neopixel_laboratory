@@ -84,8 +84,11 @@ def main():
         _logger.debug("Received: {} {} {}".format(command[COMMAND_NAME],
                                                  " ".join(command[COMMAND_POSITIONAL_ARGUMENTS]),
                                                  " ".join([f"-{k} {v}" for k, v in command[COMMAND_KEYWORD_ARGUMENTS].items()])))
-
-        Command.build_command(command).execute()
+        try:
+            Command.build_command(command).execute()
+        except Exception as e:
+            _logger.error(f"Encountered error: {e}")
+            _logger.debug("", exc_info=True)
 
 
 def _interrupt() -> None:
