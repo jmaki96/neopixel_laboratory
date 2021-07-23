@@ -25,9 +25,9 @@ import platform
 import daemon
 from daemon import pidfile
 
-from settings import * 
-from messaging import read_command
-from commands.command import Command
+from app.settings import * 
+from app.messaging import read_command
+from app.neopixel.daemon.commands.command import Command
 
 # =====================
 # === LOGGING SETUP ===

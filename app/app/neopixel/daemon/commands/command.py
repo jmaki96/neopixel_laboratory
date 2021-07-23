@@ -5,7 +5,7 @@ import logging
 from abc import abstractmethod, ABC
 from typing import Any, List, Dict
 
-from settings import COMMAND_NAME, COMMAND_KEYWORD_ARGUMENTS, COMMAND_POSITIONAL_ARGUMENTS
+from app.settings import COMMAND_NAME, COMMAND_KEYWORD_ARGUMENTS, COMMAND_POSITIONAL_ARGUMENTS
 
 _logger = logging.getLogger(__name__)
 
@@ -77,8 +77,8 @@ class Command(ABC):
             raise ValueError(f"Cannot find command named: {command_name}")
 
 # Register commands
-from commands.off_command import OffCommand
-from commands.set_light import SetLightCommand
+from app.neopixel.daemon.commands.off_command import OffCommand
+from app.neopixel.daemon.commands.set_light import SetLightCommand
 
 class EchoCommand(Command):
     """ Testing command which simply echoes back the name, args, and kwargs."""

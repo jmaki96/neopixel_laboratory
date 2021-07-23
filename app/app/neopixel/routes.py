@@ -3,7 +3,10 @@
 
 import logging
 
-from flask import Blueprint, Response, make_response
+from flask import Blueprint, Response, make_response, request
+
+from app.messaging import write_command
+from app.settings import STDIN_NAMED_PIPE_PATH
 
 _logger = logging.getLogger(__name__)
 
@@ -18,18 +21,14 @@ def submit_command() -> Response:
         Response: [description]
     """
 
-    pass
+    command_name = request.args.get("command_name", "")
+    command_args = request.args.get("command_args", [])
+    command_kwargs = request.args.get("command_kwargs", {})
 
+    write_command(command_name, command_args, command_kwargs, fifo=STDIN_NAMED_PIPE_PATH)
 
-@bp.route('/off')
-def off() -> Response:
-    """ Turns off all running neopixels
+    return make_response("", 200)
 
-    Returns:
-        Response: OK if process exits appropriately
-    """
-
-    return make_response("OK", 200)
 
 @bp.route('/start', methods=["GET"])
 def hello() -> Response:

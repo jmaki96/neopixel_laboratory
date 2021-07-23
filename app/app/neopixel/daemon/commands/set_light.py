@@ -5,8 +5,8 @@ from typing import Tuple
 
 import neopixel
 
-from settings import PIXEL_PIN, MAX_NUM_PIXELS
-from commands.command import Command
+from app.settings import PIXEL_PIN, MAX_NUM_PIXELS
+from app.neopixel.daemon.commands.command import Command
 
 _logger = logging.getLogger(__name__)
 

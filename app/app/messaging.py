@@ -8,7 +8,7 @@ import logging
 import sys
 from typing import List, Dict, Optional
 
-from settings import MAX_MESSAGE_SIZE, STDIN_NAMED_PIPE_PATH, STDOUT_NAMED_PIPE_PATH, \
+from app.settings import MAX_MESSAGE_SIZE, STDIN_NAMED_PIPE_PATH, STDOUT_NAMED_PIPE_PATH, \
                      COMMAND_NAME, COMMAND_KEYWORD_ARGUMENTS, COMMAND_POSITIONAL_ARGUMENTS, \
                      COMMAND_ENCODING
 
