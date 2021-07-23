@@ -13,7 +13,7 @@ _logger = logging.getLogger(__name__)
 bp = Blueprint('neopixel', __name__, url_prefix='/np')
 
 
-@bp.route('/set')
+@bp.route('/set', methods=["GET"])
 def set_light() -> Response:
     """ Sets lights to provided brightness and color
 
