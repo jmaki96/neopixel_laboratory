@@ -43,9 +43,9 @@ class SetLightCommand(Command):
 
         if color[:2] == "0x":
             # Hex
-            r = int("0x" + color[2:4])
-            g = int("0x" + color[4:6])
-            b = int("0x" + color[6:8])
+            r = int("0x" + color[2:4], 0)
+            g = int("0x" + color[4:6], 0)
+            b = int("0x" + color[6:8], 0)
         elif "-" in color:
             # Dec
             r, g, b, = [int(val) for val in color.split("-")]
