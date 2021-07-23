@@ -18,6 +18,3 @@ SQLALCHEMY_TRACK_MODIFICATIONS = False
 # Global settings
 LOG_LEVEL = logging.DEBUG
 
-# Neopixel settings
-PIXEL_PIN = board.D12
-MAX_NUM_PIXELS = 36
