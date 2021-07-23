@@ -98,6 +98,7 @@ def write_command(command: str, args: List[str], kwargs: Dict[str, str], fifo: O
     }
 
     command_byte_string = json.dumps(command_schema).encode(COMMAND_ENCODING)
+    _logger.debug(f"command_byte_string: {command_byte_string}")
 
     with open(fifo, "wb") as stdout_h:
         message = create_msg(command_byte_string)
