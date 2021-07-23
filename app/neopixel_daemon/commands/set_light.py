@@ -1,5 +1,6 @@
 """ Command that powers off neopixels
 """
+import logging
 from typing import Tuple
 
 import neopixel
@@ -7,6 +8,7 @@ import neopixel
 from settings import PIXEL_PIN, MAX_NUM_PIXELS
 from commands.command import Command
 
+_logger = logging.getLogger(__name__)
 
 class SetLightCommand(Command):
     """ Powers off neopixels."""
@@ -19,7 +21,8 @@ class SetLightCommand(Command):
         brightness = float(self.kwargs["brightness"])
         color = self._get_color(self.kwargs["color"])
 
-        pixels = neopixel.NeoPixel(PIXEL_PIN, MAX_NUM_PIXELS, brightness=brightness)
+        _logger.debug(f"programming neopixels with brightness: {brightness} and color: {color}")
+        pixels = neopixel.NeoPixel(PIXEL_PIN, MAX_NUM_PIXELS, brightness=brightness, auto_write=False)
 
         pixels.fill(color)
         pixels.show()
