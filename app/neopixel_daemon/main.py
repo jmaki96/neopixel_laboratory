@@ -27,6 +27,7 @@ from daemon import pidfile
 
 from settings import * 
 from messaging import read_command
+from commands.command import Command
 
 # =====================
 # === LOGGING SETUP ===
@@ -84,8 +85,7 @@ def main():
                                                  " ".join(command[COMMAND_POSITIONAL_ARGUMENTS]),
                                                  " ".join([f"-{k} {v}" for k, v in command[COMMAND_KEYWORD_ARGUMENTS].items()])))
 
-        if command[COMMAND_NAME] == "echo":
-            _logger.info(f"echo {json.dumps(command, indent=4)}")
+        Command.build_command(command).execute()
 
 
 def _interrupt() -> None:

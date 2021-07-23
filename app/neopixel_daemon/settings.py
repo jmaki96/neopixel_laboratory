@@ -1,7 +1,7 @@
 """ Stores global settings for neopixeld
 """
 import os
-import board
+# import board
 
 # Operating system variables
 MAC_VERSION = {"Darwin"}
@@ -24,5 +24,5 @@ STDIN_NAMED_PIPE_PATH = os.path.join(os.getcwd(), f"{DAEMON_NAME}.stdin")
 STDOUT_NAMED_PIPE_PATH = os.path.join(os.getcwd(),f"{DAEMON_NAME}.stdout")
 
 # Neopixel settings
-PIXEL_PIN = board.D12
+# PIXEL_PIN = board.D12
 MAX_NUM_PIXELS = 36

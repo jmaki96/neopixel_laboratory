@@ -140,7 +140,7 @@ if __name__ == "__main__":
         if not os.path.exists(STDIN_NAMED_PIPE_PATH):
             os.mkfifo(STDIN_NAMED_PIPE_PATH)
 
-        write_command("test_command", 
+        write_command("echo", 
                       ["pos_arg1", "pos_arg2"], 
                       {"key1": "value1",
                        "key2": "value2"},
