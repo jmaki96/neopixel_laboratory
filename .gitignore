@@ -10,3 +10,5 @@
 
 # Ignore secret files
 *.env
+
+**/keys/*

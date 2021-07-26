@@ -83,3 +83,7 @@ _logger.info("Registering Flask blueprints...")
 app.register_blueprint(test_bp)
 app.register_blueprint(np_bp)
 _logger.info("Done.")
+
+
+if __name__ == "__main__":
+    app.run()

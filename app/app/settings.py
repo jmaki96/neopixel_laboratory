@@ -6,8 +6,10 @@ This module should be imported like: import settings so that namespace conflicts
 import os
 import logging
 
+from app.utils import is_raspi
+
 # Load raspi only settings
-if "arm" in os.uname()[4]:
+if is_raspi():
     import board
 
     PIXEL_PIN = board.D12
@@ -47,4 +49,6 @@ STDOUT_NAMED_PIPE_PATH = os.path.join(os.getcwd(),f"{DAEMON_NAME}.stdout")
 
 # Neopixel settings
 MAX_NUM_PIXELS = 36
+
+# Google app key path
 
